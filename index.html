@@ -17,12 +17,53 @@
       font-family: Arial, sans-serif;
       color: #333;
     }
+    .Error{
+      text-align: center;
+      font-size: 30px;
+      margin-top: 10px;
+      font-family: Arial, sans-serif;
+      color: red;
+      visibility: hidden;
+
+    }
+    .Button{
+      text-align: center;
+      font-size: 30px;
+      margin-top: 5px;
+      font-family: Arial, sans-serif;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      background-color: #70c5ce;
+      height: 60px;
+      width: 120px;
+
+    }
+    .ButtonBox{
+      margin-top: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #highscorelabel{
+      margin-left: 30px;
+      font-size: 30px;
+    }
+    #highscore{
+      font-size: 30px;
+    }
   </style>
 </head>
 <body>
   <div class="message" id="message">Have a KJDG tour, double TAP to start</div>
   <canvas id="birdCanvas" width="320" height="480"></canvas>
-
+<div class="Error" id="error">Oops! Try Again</div>
+<div class="ButtonBox">
+  <button class="Button" id="restart">Restart</button>
+  
+    <p id="highscorelabel">Highscore:</p>  <b id="highscore" id="highscore">0  </b>
+ 
+</div>
   <script src="game.js"></script>
 </body>
 </html>
