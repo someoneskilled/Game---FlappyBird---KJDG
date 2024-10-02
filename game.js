@@ -1,6 +1,11 @@
 const canvas = document.getElementById('birdCanvas');
 const ctx = canvas.getContext('2d');
 const message = document.getElementById('message');
+const error = document.getElementById('error');
+const restart = document.getElementById('restart');
+var highscore = document.getElementById('highscore');
+var score =0;
+var highScoreCount = 0;
 
 // Game variables
 let birdY = 150;
@@ -18,7 +23,7 @@ let frameCount = 0;
 let isGameOver = false;
 let isGameStarted = false;
 
-const wordList = ['fun', 'learning', 'innovation', 'projects', 'development', 'networking', 'collaboration', 'growth', 'creativity', 'exposure', 'skills', 'hackathons', 'teamwork', 'mentorship', 'technology', 'real-world experience', 'leadership', 'exploration', 'empowerment', 'knowledge-sharing']; // Customize this list
+const wordList = ['fun', 'learning', 'innovation', 'projects', 'development', 'networking', 'collaboration', 'growth', 'creativity', 'exposure', 'skills', 'hackathons', 'teamwork', 'mentorship', 'technology', 'real-world experience', 'leadership', 'exploration', 'knowledge-sharing']; // Customize this list
 
 // Bird object
 const bird = {
@@ -98,21 +103,42 @@ function gameLoop() {
       (birdY < pipe.height || birdY + bird.height > pipe.height + pipeGap)
     ) {
       isGameOver = true;
-      alert('Game Over');
+      //alert('Game Over');
+      error.style.visibility = "visible";
+      highscore.innerHTML = highScoreCount;
+
+     //location.reload();
       return;
     }
+    if (!pipe.passed && pipe.x + pipeWidth < birdX) {
+      pipe.passed = true;
+      score++;
+      if (score > highScoreCount) {
+        highScoreCount = score;
+      }
+    }
   });
+
+  // Check if the bird has passed the pipe
+ 
+
 
   // Prevent bird from falling off the screen
   if (birdY + bird.height >= canvas.height || birdY <= 0) {
     isGameOver = true;
-    alert('Game Over');
+    error.style.visibility = "visible";
+    highscore.innerHTML = highScoreCount;
+    //alert('Game Over restarting....');
+    //location.reload();
     return;
   }
 
   // Request the next frame
   requestAnimationFrame(gameLoop);
 }
+restart.addEventListener('click',()=>{
+  location.reload();
+});
 
 // Initial display of the welcome message
-message.textContent = "Have a KJDG tour, TAP to start";
+message.textContent = "Have a KJDG tour, double TAP to start";
